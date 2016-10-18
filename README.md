@@ -1,7 +1,5 @@
 # DiffBase
 
-[![Build Status](https://travis-ci.org/jrevels/DiffBase.jl.svg?branch=master)](https://travis-ci.org/jrevels/DiffBase.jl)
+[![Build Status](https://travis-ci.org/JuliaDiff/DiffBase.jl.svg?branch=master)](https://travis-ci.org/JuliaDiff/DiffBase.jl)
 
-[![Coverage Status](https://coveralls.io/repos/jrevels/DiffBase.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/jrevels/DiffBase.jl?branch=master)
-
-[![codecov.io](http://codecov.io/github/jrevels/DiffBase.jl/coverage.svg?branch=master)](http://codecov.io/github/jrevels/DiffBase.jl?branch=master)
+[![Coverage Status](https://coveralls.io/repos/JuliaDiff/DiffBase.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/JuliaDiff/DiffBase.jl?branch=master)

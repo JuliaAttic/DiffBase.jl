@@ -1,0 +1,153 @@
+########################
+# f(x::Number)::Number #
+########################
+
+num2num_1(x) = sin(x)^2 / cos(x)^2
+num2num_2(x) = 2*x + sqrt(x*x*x)
+num2num_3(x) = 10.31^(x + x) - x
+num2num_4(x) = x
+num2num_5(x) = 1
+
+#######################
+# f(x::Number)::Array #
+#######################
+
+function num2arr_1(x)
+    return reshape([num2num_1(x),
+                    num2num_2(x),
+                    num2num_3(x),
+                    num2num_1(x) - num2num_2(x),
+                    num2num_2(x),
+                    num2num_3(x),
+                    num2num_2(x),
+                    num2num_3(x)], 2, 2, 2)
+end
+
+########################
+# f(x::Vector)::Number #
+########################
+
+vec2num_1(x) = (exp(x[1]) + log(x[3]) * x[4]) / x[5]
+vec2num_2(x) = x[1]*x[2] + sin(x[1])
+vec2num_3(x) = norm(x' .* x, 1)
+
+
+function rosenbrock_1(x)
+    a = one(eltype(x))
+    b = 100 * a
+    result = zero(eltype(x))
+    for i in 1:length(x)-1
+        result += (a - x[i])^2 + b*(x[i+1] - x[i]^2)^2
+    end
+    return result
+end
+
+function rosenbrock_2(x)
+    a = x[1]
+    b = 100 * a
+    v = map((i, j) -> (a - j)^2 + b*(i - j^2)^2, x[2:end], x[1:end-1])
+    return sum(v)
+end
+
+rosenbrock_3(x) = sum(map((i, j) -> (1 - j)^2 + 100*(i - j^2)^2, x[2:end], x[1:end-1]))
+rosenbrock_4(x) = sum((1 - x[1:end-1]).^2 + 100*(x[2:end] - x[1:end-1].^2).^2)
+
+function ackley(x)
+    a, b, c = 20.0, -0.2, 2.0*π
+    len_recip = inv(length(x))
+    sum_sqrs = zero(eltype(x))
+    sum_cos = sum_sqrs
+    for i in x
+        sum_cos += cos(c*i)
+        sum_sqrs += i^2
+    end
+    return (-a * exp(b * sqrt(len_recip*sum_sqrs)) -
+            exp(len_recip*sum_cos) + a + e)
+end
+
+self_weighted_logit(x) = inv(1.0 + exp(-dot(x, x)))
+
+########################
+# f(x::Matrix)::Number #
+########################
+
+mat2num_1(x) = det(first(x) * inv(x * x) + x)
+
+function mat2num_2(x)
+    a = reshape(x, length(x), 1)
+    b = reshape(copy(x), 1, length(x))
+    return trace(log((1 .+ (a * b)) .+ a .- b))
+end
+
+function mat2num_3(x)
+    k = length(x)
+    N = isqrt(k)
+    A = reshape(x, N, N)
+    return sum(map(n -> sqrt(abs(n) + n^2) * 0.5, A))
+end
+
+################################
+# f!(y::Array, x::Array)::Void #
+################################
+
+# Credit for `chebyquad!`, `brown_almost_linear!`, and `trigonometric!` goes to
+# Kristoffer Carlsson (@KristofferC) - I (@jrevels) just ported them over. I've
+# modified these functions to allow for tunable input/output sizes. These changes
+# might make these functions incorrect in terms of their original purpose, but
+# shouldn't be too different computationally (which is what we care about for
+# tests/benchmarks).
+
+function chebyquad!(y, x)
+    tk = 1/length(x)
+    for j = 1:length(x)
+        temp1 = 1.0
+        temp2 = 2x[j]-1
+        temp = 2temp2
+        for i = 1:length(y)
+            y[i] += temp2
+            ti = temp*temp2 - temp1
+            temp1 = temp2
+            temp2 = ti
+        end
+    end
+    iev = -1.0
+    for k = 1:length(y)
+        y[k] *= tk
+        if iev > 0
+            y[k] += 1/(k^2-1)
+        end
+        iev = -iev
+    end
+    return nothing
+end
+
+function brown_almost_linear!(y, x)
+    c = sum(x) - (length(x) + 1)
+    for i = 1:(length(x)-1), j = 1:(length(y)-1)
+        y[j] += x[i] + c
+    end
+    y[length(y)] = prod(x) - 1
+    return nothing
+end
+
+function trigonometric!(y, x)
+    for i in x, j in eachindex(y)
+        y[j] = cos(i)
+    end
+    c = sum(y)
+    n = length(x)
+    for i in x, j in eachindex(y)
+        y[j] = sin(i) * y[j] + n - c
+    end
+    return nothing
+end
+
+######################
+# f(x::Array)::Array #
+######################
+
+chebyquad(x) = (y = zeros(x); chebyquad!(y, x); return y)
+
+brown_almost_linear(x) = (y = zeros(x); brown_almost_linear!(y, x); return y)
+
+trigonometric(x) = (y = zeros(x); trigonometric!(y, x); return y)
