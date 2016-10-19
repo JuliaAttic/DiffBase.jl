@@ -27,7 +27,7 @@ HessianResult(x::AbstractArray) = DiffResult(first(x), similar(x), similar(x, le
 Base.eltype(r::DiffResult) = eltype(typeof(r))
 Base.eltype{O,V,D}(::Type{DiffResult{O,V,D}}) = eltype(V)
 
-Base.:(==)(a::DiffResult, b::DiffResult) = a.value == b.value && a.derivs == b.derivs
+@compat Base.:(==)(a::DiffResult, b::DiffResult) = a.value == b.value && a.derivs == b.derivs
 
 # value/value! #
 #--------------#
