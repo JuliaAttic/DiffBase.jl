@@ -24,7 +24,7 @@ const NUMBER_TO_NUMBER_FUNCS = (num2num_1, num2num_2, num2num_3, num2num_4, num2
 
 const NUMBER_TO_ARRAY_FUNCS = (num2arr_1,)
 
-const VECTOR_TO_NUMBER_FUNCS = (vec2num_1, vec2num_2, vec2num_3,
+const VECTOR_TO_NUMBER_FUNCS = (vec2num_1, vec2num_2,  vec2num_3, vec2num_4,
                                 rosenbrock_1, rosenbrock_2, rosenbrock_3, rosenbrock_4,
                                 ackley, self_weighted_logit)
 
@@ -32,7 +32,7 @@ const MATRIX_TO_NUMBER_FUNCS = (det, mat2num_1, mat2num_2, mat2num_3)
 
 const INPLACE_ARRAY_TO_ARRAY_FUNCS = (chebyquad!, brown_almost_linear!, trigonometric!)
 
-const ARRAY_TO_ARRAY_FUNCS = (-, chebyquad, brown_almost_linear, trigonometric)
+const ARRAY_TO_ARRAY_FUNCS = (-, chebyquad, brown_almost_linear, trigonometric, arr2arr_1)
 
 const MATRIX_TO_MATRIX_FUNCS = (inv,)
 

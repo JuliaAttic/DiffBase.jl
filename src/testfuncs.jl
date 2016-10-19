@@ -35,7 +35,8 @@ end
 
 vec2num_1(x) = (exp(x[1]) + log(x[3]) * x[4]) / x[5]
 vec2num_2(x) = x[1]*x[2] + sin(x[1])
-vec2num_3(x) = norm(x' .* x, 1)
+vec2num_3(x) = vecnorm(x' .* x)
+vec2num_4(x) = ((sum(x) + prod(x)); 1)
 
 function rosenbrock_1(x)
     a = one(eltype(x))
@@ -160,3 +161,5 @@ chebyquad(x) = (y = zeros(x); chebyquad!(y, x); return y)
 brown_almost_linear(x) = (y = zeros(x); brown_almost_linear!(y, x); return y)
 
 trigonometric(x) = (y = zeros(x); trigonometric!(y, x); return y)
+
+arr2arr_1(x) = (sum(x .* x); zeros(x))
