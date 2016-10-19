@@ -1,3 +1,9 @@
+#=
+Some of the below test functions have been modified from their original form to to allow for
+tunable input/output sizes, or to test certain programmatic behaviors. Thus, one should not
+expect these functions to be "correct" for their original purpose.
+=#
+
 ########################
 # f(x::Number)::Number #
 ########################
@@ -30,7 +36,6 @@ end
 vec2num_1(x) = (exp(x[1]) + log(x[3]) * x[4]) / x[5]
 vec2num_2(x) = x[1]*x[2] + sin(x[1])
 vec2num_3(x) = norm(x' .* x, 1)
-
 
 function rosenbrock_1(x)
     a = one(eltype(x))
@@ -86,16 +91,20 @@ function mat2num_3(x)
     return sum(map(n -> sqrt(abs(n) + n^2) * 0.5, A))
 end
 
+###########################################
+# f(::Matrix, ::Matrix, ::Matrix)::Number #
+###########################################
+
+relu(x) = @compat log.(1.0 .+ exp(x))
+sigmoid(n) = 1. / (1. + exp(-n))
+neural_step(x1, w1, w2) = sigmoid(dot(w2[1:size(w1, 2)], relu(w1 * x1[1:size(w1, 2)])))
+
 ################################
 # f!(y::Array, x::Array)::Void #
 ################################
 
 # Credit for `chebyquad!`, `brown_almost_linear!`, and `trigonometric!` goes to
-# Kristoffer Carlsson (@KristofferC) - I (@jrevels) just ported them over. I've
-# modified these functions to allow for tunable input/output sizes. These changes
-# might make these functions incorrect in terms of their original purpose, but
-# shouldn't be too different computationally (which is what we care about for
-# tests/benchmarks).
+# Kristoffer Carlsson (@KristofferC).
 
 function chebyquad!(y, x)
     tk = 1/length(x)

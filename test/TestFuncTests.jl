@@ -21,6 +21,10 @@ for f in DiffBase.MATRIX_TO_NUMBER_FUNCS
     @test isa(f(x), Number)
 end
 
+for f in DiffBase.TERNARY_MATRIX_TO_NUMBER_FUNCS
+    @test isa(f(A, B, x), Number)
+end
+
 # f returns Array,
 
 for f in DiffBase.NUMBER_TO_ARRAY_FUNCS

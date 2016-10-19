@@ -37,7 +37,10 @@ const ARRAY_TO_ARRAY_FUNCS = (-, chebyquad, brown_almost_linear, trigonometric)
 const MATRIX_TO_MATRIX_FUNCS = (inv,)
 
 const BINARY_MATRIX_TO_MATRIX_FUNCS = (+, .+, -, .-, *, .*, ./, .^,
-                                      A_mul_Bt, At_mul_B, At_mul_Bt,
-                                      A_mul_Bc, Ac_mul_B, Ac_mul_Bc)
+                                       A_mul_Bt, At_mul_B, At_mul_Bt,
+                                       A_mul_Bc, Ac_mul_B, Ac_mul_Bc)
+
+const TERNARY_MATRIX_TO_NUMBER_FUNCS = (neural_step,)
+
 
 end # module
