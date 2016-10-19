@@ -12,9 +12,12 @@ DiffResult{V,O}(value::V, derivs::NTuple{O}) = DiffResult{O,V,typeof(derivs)}(va
 DiffResult(value, derivs...) = DiffResult(value, derivs)
 DiffResult(value) = DiffResult(copy(value), copy(value))
 
+# can't define both these typealiases and the constructors on v0.4 or lower
+if VERSION >= v"0.5-"
 typealias GradientResult{V<:Number,G} DiffResult{1,V,Tuple{G}}
 typealias JacobianResult{V<:AbstractArray,J} DiffResult{1,V,Tuple{J}}
 typealias HessianResult{V,G,H} DiffResult{2,V,Tuple{G,H}}
+end
 
 GradientResult(x::AbstractArray) = DiffResult(first(x), similar(x))
 JacobianResult(x::AbstractArray) = DiffResult(similar(x), similar(x, length(x), length(x)))
