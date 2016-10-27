@@ -82,7 +82,7 @@ mat2num_1(x) = det(first(x) * inv(x * x) + x)
 function mat2num_2(x)
     a = reshape(x, length(x), 1)
     b = reshape(copy(x), 1, length(x))
-    return trace(log((1 .+ (a * b)) .+ a .- b))
+    return trace(@compat(log.((1 .+ (a * b)) .+ a .- b)))
 end
 
 function mat2num_3(x)
