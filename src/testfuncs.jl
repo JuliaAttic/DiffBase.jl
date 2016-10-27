@@ -96,8 +96,8 @@ end
 # f(::Matrix, ::Matrix, ::Matrix)::Number #
 ###########################################
 
-relu(x) = @compat log.(1.0 .+ exp(x))
-sigmoid(n) = 1. / (1. + exp(-n))
+relu(x) = @compat(log.(1.0 .+ @compat(exp.(x))))
+sigmoid(n) = 1. / (1. + @compat(exp.(-n)))
 neural_step(x1, w1, w2) = sigmoid(dot(w2[1:size(w1, 2)], relu(w1 * x1[1:size(w1, 2)])))
 
 ################################
