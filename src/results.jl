@@ -29,6 +29,8 @@ Base.eltype{O,V,D}(::Type{DiffResult{O,V,D}}) = eltype(V)
 
 @compat Base.:(==)(a::DiffResult, b::DiffResult) = a.value == b.value && a.derivs == b.derivs
 
+Base.copy(r::DiffResult) = DiffResult(copy(r.value), map(copy, r.derivs))
+
 # value/value! #
 #--------------#
 

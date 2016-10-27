@@ -32,6 +32,14 @@ issimilar(t::Tuple) = issimilar(t...)
 @test eltype(rn) === typeof(n0)
 @test eltype(rx) === eltype(x0)
 
+rn_copy = copy(rn)
+@test rn == rn_copy
+@test rn !== rn_copy
+
+rx_copy = copy(rx)
+@test rx == rx_copy
+@test rx !== rx_copy
+
 # value/value! #
 #--------------#
 
