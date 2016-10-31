@@ -26,13 +26,6 @@ Equivalent to `DiffResult(value, derivs::Tuple)`, where `derivs...` is the splat
 """
 DiffResult(value, derivs...) = DiffResult(value, derivs)
 
-# can't define both these typealiases and the constructors on v0.4 or lower
-if VERSION >= v"0.5-"
-typealias GradientResult{V<:Number,G} DiffResult{1,V,Tuple{G}}
-typealias JacobianResult{V<:AbstractArray,J} DiffResult{1,V,Tuple{J}}
-typealias HessianResult{V,G,H} DiffResult{2,V,Tuple{G,H}}
-end
-
 """
     GradientResult(x::AbstractArray)
 
@@ -180,7 +173,20 @@ Note that this method returns a reference, not a copy. Thus, if `gradient(r)` is
 mutating `gradient(r)` will mutate `r`.
 """
 gradient(r::DiffResult) = derivative(r)
+
+"""
+    gradient!(r::DiffResult, x)
+
+Copy `x` into `r`'s gradient storage, such that `gradient(r) == x`.
+"""
 gradient!(r::DiffResult, x) = derivative!(r, x)
+
+"""
+    gradient!(f, r::DiffResult, x)
+
+Like `gradient!(r::DiffResult, x)`, but with `f` applied to each element,
+such that `gradient(r) == map(f, x)`.
+"""
 gradient!(f, r::DiffResult, x) = derivative!(f, r, x)
 
 """
@@ -192,7 +198,20 @@ Note that this method returns a reference, not a copy. Thus, if `jacobian(r)` is
 mutating `jacobian(r)` will mutate `r`.
 """
 jacobian(r::DiffResult) = derivative(r)
+
+"""
+    jacobian!(r::DiffResult, x)
+
+Copy `x` into `r`'s Jacobian storage, such that `jacobian(r) == x`.
+"""
 jacobian!(r::DiffResult, x) = derivative!(r, x)
+
+"""
+    jacobian!(f, r::DiffResult, x)
+
+Like `jacobian!(r::DiffResult, x)`, but with `f` applied to each element,
+such that `jacobian(r) == map(f, x)`.
+"""
 jacobian!(f, r::DiffResult, x) = derivative!(f, r, x)
 
 """
@@ -204,5 +223,18 @@ Note that this method returns a reference, not a copy. Thus, if `hessian(r)` is 
 mutating `hessian(r)` will mutate `r`.
 """
 hessian(r::DiffResult) = derivative(r, Val{2})
+
+"""
+    hessian!(r::DiffResult, x)
+
+Copy `x` into `r`'s Hessian storage, such that `hessian(r) == x`.
+"""
 hessian!(r::DiffResult, x) = derivative!(r, x, Val{2})
+
+"""
+    hessian!(f, r::DiffResult, x)
+
+Like `hessian!(r::DiffResult, x)`, but with `f` applied to each element,
+such that `hessian(r) == map(f, x)`.
+"""
 hessian!(f, r::DiffResult, x) = derivative!(f, r, x, Val{2})

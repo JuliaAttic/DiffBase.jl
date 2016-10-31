@@ -1,0 +1,20 @@
+site_name:        DiffBase.jl
+repo_url:         https://github.com/JuliaDiff/DiffBase.jl
+site_description:
+site_author:      jrevels
+
+theme: material
+
+extra_css:
+  - assets/Documenter.css
+
+markdown_extensions:
+  - extra
+  - tables
+  - fenced_code
+
+docs_dir: 'build'
+
+pages:
+  - Introduction: index.md
+  - DiffResult API: diffresult.md
