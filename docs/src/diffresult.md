@@ -10,13 +10,13 @@ CurrentModule = DiffBase
 - [ReverseDiff](https://github.com/JuliaDiff/ReverseDiff.jl)
 
 Many differentiation techniques can calculate primal values and multiple orders of
-derivatives simultaneously. In other words, there are techniques that allow one to
-compute `f(x)`, `∇f(x)` and `H(f(x))` in one fell swoop!
+derivatives simultaneously. In other words, there are techniques for computing `f(x)`,
+`∇f(x)` and `H(f(x))` in one fell swoop!
 
 For this purpose, DiffBase provides the `DiffResult` type, which can be passed
-to in-place differentiation methods instead of an output buffer. All results
-computed by the method are loaded into the given `DiffResult`, which the user
-can then query using DiffBase's API.
+to in-place differentiation methods instead of an output buffer. The method
+then loads all computed results into the given `DiffResult`, which the user
+can query afterwards using DiffBase's API.
 
 Here's an example of the `DiffResult` in action using ForwardDiff:
 
