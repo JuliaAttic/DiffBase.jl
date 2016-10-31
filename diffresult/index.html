@@ -224,8 +224,8 @@
 <li><a href="https://github.com/JuliaDiff/ForwardDiff.jl">ForwardDiff</a></li>
 <li><a href="https://github.com/JuliaDiff/ReverseDiff.jl">ReverseDiff</a></li>
 </ul>
-<p>Many differentiation techniques can calculate primal values and multiple orders of derivatives simultaneously. In other words, there are techniques that allow one to compute <code>f(x)</code>, <code>∇f(x)</code> and <code>H(f(x))</code> in one fell swoop!</p>
-<p>For this purpose, DiffBase provides the <code>DiffResult</code> type, which can be passed to in-place differentiation methods instead of an output buffer. All results computed by the method are loaded into the given <code>DiffResult</code>, which the user can then query using DiffBase's API.</p>
+<p>Many differentiation techniques can calculate primal values and multiple orders of derivatives simultaneously. In other words, there are techniques for computing <code>f(x)</code>, <code>∇f(x)</code> and <code>H(f(x))</code> in one fell swoop!</p>
+<p>For this purpose, DiffBase provides the <code>DiffResult</code> type, which can be passed to in-place differentiation methods instead of an output buffer. The method then loads all computed results into the given <code>DiffResult</code>, which the user can query afterwards using DiffBase's API.</p>
 <p>Here's an example of the <code>DiffResult</code> in action using ForwardDiff:</p>
 <pre><code class="julia">julia&gt; using ForwardDiff, DiffBase
 
@@ -261,12 +261,12 @@ true
 
 <p>Return a <code>DiffResult</code> instance where values will be stored in the provided <code>value</code> storage and derivatives will be stored in the provided <code>derivs</code> storage.</p>
 <p>Note that the arguments can be <code>Number</code>s or <code>AbstractArray</code>s, depending on the dimensionality of your target function.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L11-L19' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L11-L19' class='documenter-source'>source</a><br></p>
 <pre><code>DiffResult(value, derivs...)
 </code></pre>
 
 <p>Equivalent to <code>DiffResult(value, derivs::Tuple)</code>, where <code>derivs...</code> is the splatted form of <code>derivs::Tuple</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L22-L26' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L22-L26' class='documenter-source'>source</a><br></p>
 <p><a id='DiffBase.JacobianResult' href='#DiffBase.JacobianResult'>#</a>
 <strong><code>DiffBase.JacobianResult</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>JacobianResult(x::AbstractArray)
@@ -274,13 +274,13 @@ true
 
 <p>Construct a <code>DiffResult</code> that can be used for Jacobian calculations where <code>x</code> is the input to the target function. This method assumes that the target function's output dimension equals its input dimension.</p>
 <p>Note that <code>JacobianResult</code> allocates its own storage; <code>x</code> is only used for type and shape information. If you want to allocate storage yourself, use the <code>DiffResult</code> constructor instead.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L41-L51' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L41-L51' class='documenter-source'>source</a><br></p>
 <pre><code>JacobianResult(y::AbstractArray, x::AbstractArray)
 </code></pre>
 
 <p>Construct a <code>DiffResult</code> that can be used for Jacobian calculations where <code>x</code> is the input to the target function, and <code>y</code> is the output (e.g. when taking the Jacobian of <code>f!(y, x)</code>).</p>
 <p>Like the single argument version, <code>y</code> and <code>x</code> are only used for type and shape information and are not stored in the returned <code>DiffResult</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L54-L63' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L54-L63' class='documenter-source'>source</a><br></p>
 <p><a id='DiffBase.GradientResult' href='#DiffBase.GradientResult'>#</a>
 <strong><code>DiffBase.GradientResult</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>GradientResult(x::AbstractArray)
@@ -288,7 +288,7 @@ true
 
 <p>Construct a <code>DiffResult</code> that can be used for gradient calculations where <code>x</code> is the input to the target function.</p>
 <p>Note that <code>GradientResult</code> allocates its own storage; <code>x</code> is only used for type and shape information. If you want to allocate storage yourself, use the <code>DiffResult</code> constructor instead.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L29-L38' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L29-L38' class='documenter-source'>source</a><br></p>
 <p><a id='DiffBase.HessianResult' href='#DiffBase.HessianResult'>#</a>
 <strong><code>DiffBase.HessianResult</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>HessianResult(x::AbstractArray)
@@ -296,7 +296,7 @@ true
 
 <p>Construct a <code>DiffResult</code> that can be used for Hessian calculations where <code>x</code> is the input to the target function.</p>
 <p>Note that <code>HessianResult</code> allocates its own storage; <code>x</code> is only used for type and shape information. If you want to allocate storage yourself, use the <code>DiffResult</code> constructor instead.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L66-L75' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L66-L75' class='documenter-source'>source</a><br></p>
 <p><a id='Accessing-data-from-DiffResults-1'></a></p>
 <h2 id="accessing-data-from-diffresults">Accessing data from DiffResults</h2>
 <p><a id='DiffBase.value' href='#DiffBase.value'>#</a>
@@ -306,7 +306,7 @@ true
 
 <p>Return the primal value stored in <code>r</code>.</p>
 <p>Note that this method returns a reference, not a copy. Thus, if <code>value(r)</code> is mutable, mutating <code>value(r)</code> will mutate <code>r</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L88-L95' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L88-L95' class='documenter-source'>source</a><br></p>
 <p><a id='DiffBase.derivative' href='#DiffBase.derivative'>#</a>
 <strong><code>DiffBase.derivative</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>derivative(r::DiffResult, ::Type{Val{i}} = Val{1})
@@ -314,7 +314,7 @@ true
 
 <p>Return the <code>ith</code> derivative stored in <code>r</code>, defaulting to the first derivative.</p>
 <p>Note that this method returns a reference, not a copy. Thus, if <code>derivative(r)</code> is mutable, mutating <code>derivative(r)</code> will mutate <code>r</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L117-L124' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L117-L124' class='documenter-source'>source</a><br></p>
 <p><a id='DiffBase.gradient' href='#DiffBase.gradient'>#</a>
 <strong><code>DiffBase.gradient</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>gradient(r::DiffResult)
@@ -322,7 +322,7 @@ true
 
 <p>Return the gradient stored in <code>r</code> (equivalent to <code>derivative(r)</code>).</p>
 <p>Note that this method returns a reference, not a copy. Thus, if <code>gradient(r)</code> is mutable, mutating <code>gradient(r)</code> will mutate <code>r</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L167-L174' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L167-L174' class='documenter-source'>source</a><br></p>
 <p><a id='DiffBase.jacobian' href='#DiffBase.jacobian'>#</a>
 <strong><code>DiffBase.jacobian</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>jacobian(r::DiffResult)
@@ -330,7 +330,7 @@ true
 
 <p>Return the Jacobian stored in <code>r</code> (equivalent to <code>derivative(r)</code>).</p>
 <p>Note that this method returns a reference, not a copy. Thus, if <code>jacobian(r)</code> is mutable, mutating <code>jacobian(r)</code> will mutate <code>r</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L192-L199' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L192-L199' class='documenter-source'>source</a><br></p>
 <p><a id='DiffBase.hessian' href='#DiffBase.hessian'>#</a>
 <strong><code>DiffBase.hessian</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>hessian(r::DiffResult)
@@ -338,7 +338,7 @@ true
 
 <p>Return the Hessian stored in <code>r</code> (equivalent to <code>derivative(r, Val{2})</code>).</p>
 <p>Note that this method returns a reference, not a copy. Thus, if <code>hessian(r)</code> is mutable, mutating <code>hessian(r)</code> will mutate <code>r</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L217-L224' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L217-L224' class='documenter-source'>source</a><br></p>
 <p><a id='Mutating-DiffResults-1'></a></p>
 <h2 id="mutating-diffresults">Mutating DiffResults</h2>
 <p><a id='DiffBase.value!' href='#DiffBase.value!'>#</a>
@@ -347,60 +347,60 @@ true
 </code></pre>
 
 <p>Copy <code>x</code> into <code>r</code>'s value storage, such that <code>value(r) == x</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L98-L102' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L98-L102' class='documenter-source'>source</a><br></p>
 <pre><code>value!(f, r::DiffResult, x)
 </code></pre>
 
 <p>Like <code>value!(r::DiffResult, x)</code>, but with <code>f</code> applied to each element, such that <code>value(r) == map(f, x)</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L106-L110' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L106-L110' class='documenter-source'>source</a><br></p>
 <p><a id='DiffBase.derivative!' href='#DiffBase.derivative!'>#</a>
 <strong><code>DiffBase.derivative!</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>derivative!(r::DiffResult, x, ::Type{Val{i}} = Val{1})
 </code></pre>
 
 <p>Copy <code>x</code> into <code>r</code>'s <code>ith</code> derivative storage, such that <code>derivative(r, Val{i}) == x</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L127-L131' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L127-L131' class='documenter-source'>source</a><br></p>
 <pre><code>derivative!(f, r::DiffResult, x, ::Type{Val{i}} = Val{1})
 </code></pre>
 
 <p>Like <code>derivative!(r::DiffResult, x, Val{i})</code>, but with <code>f</code> applied to each element, such that <code>derivative(r, Val{i}) == map(f, x)</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L145-L150' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L145-L150' class='documenter-source'>source</a><br></p>
 <p><a id='DiffBase.gradient!' href='#DiffBase.gradient!'>#</a>
 <strong><code>DiffBase.gradient!</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>gradient!(r::DiffResult, x)
 </code></pre>
 
 <p>Copy <code>x</code> into <code>r</code>'s gradient storage, such that <code>gradient(r) == x</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L177-L181' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L177-L181' class='documenter-source'>source</a><br></p>
 <pre><code>gradient!(f, r::DiffResult, x)
 </code></pre>
 
 <p>Like <code>gradient!(r::DiffResult, x)</code>, but with <code>f</code> applied to each element, such that <code>gradient(r) == map(f, x)</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L184-L189' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L184-L189' class='documenter-source'>source</a><br></p>
 <p><a id='DiffBase.jacobian!' href='#DiffBase.jacobian!'>#</a>
 <strong><code>DiffBase.jacobian!</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>jacobian!(r::DiffResult, x)
 </code></pre>
 
 <p>Copy <code>x</code> into <code>r</code>'s Jacobian storage, such that <code>jacobian(r) == x</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L202-L206' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L202-L206' class='documenter-source'>source</a><br></p>
 <pre><code>jacobian!(f, r::DiffResult, x)
 </code></pre>
 
 <p>Like <code>jacobian!(r::DiffResult, x)</code>, but with <code>f</code> applied to each element, such that <code>jacobian(r) == map(f, x)</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L209-L214' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L209-L214' class='documenter-source'>source</a><br></p>
 <p><a id='DiffBase.hessian!' href='#DiffBase.hessian!'>#</a>
 <strong><code>DiffBase.hessian!</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>hessian!(r::DiffResult, x)
 </code></pre>
 
 <p>Copy <code>x</code> into <code>r</code>'s Hessian storage, such that <code>hessian(r) == x</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L227-L231' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L227-L231' class='documenter-source'>source</a><br></p>
 <pre><code>hessian!(f, r::DiffResult, x)
 </code></pre>
 
 <p>Like <code>hessian!(r::DiffResult, x)</code>, but with <code>f</code> applied to each element, such that <code>hessian(r) == map(f, x)</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/ef761a393854a7db0ec0da9a1a05b6c71481dc03/src/results.jl#L234-L239' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/DiffBase.jl/tree/3297662a8cb07542267f43331671746ff4bc0adc/src/results.jl#L234-L239' class='documenter-source'>source</a><br></p>
           <aside class="copyright" role="note">
             
             Documentation built with
