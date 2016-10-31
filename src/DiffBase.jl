@@ -42,5 +42,4 @@ const BINARY_MATRIX_TO_MATRIX_FUNCS = (+, .+, -, .-, *, .*, ./, .^,
 
 const TERNARY_MATRIX_TO_NUMBER_FUNCS = (neural_step,)
 
-
 end # module
