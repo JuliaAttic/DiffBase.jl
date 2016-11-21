@@ -30,9 +30,11 @@ const VECTOR_TO_NUMBER_FUNCS = (vec2num_1, vec2num_2,  vec2num_3, vec2num_4,
 
 const MATRIX_TO_NUMBER_FUNCS = (det, mat2num_1, mat2num_2, mat2num_3)
 
-const INPLACE_ARRAY_TO_ARRAY_FUNCS = (chebyquad!, brown_almost_linear!, trigonometric!)
+const INPLACE_ARRAY_TO_ARRAY_FUNCS = (chebyquad!, brown_almost_linear!, trigonometric!,
+                                      mutation_test_1!, mutation_test_2!)
 
-const ARRAY_TO_ARRAY_FUNCS = (-, chebyquad, brown_almost_linear, trigonometric, arr2arr_1)
+const ARRAY_TO_ARRAY_FUNCS = (-, chebyquad, brown_almost_linear, trigonometric, arr2arr_1,
+                              mutation_test_1, mutation_test_2)
 
 const MATRIX_TO_MATRIX_FUNCS = (inv,)
 

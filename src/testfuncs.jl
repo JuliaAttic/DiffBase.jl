@@ -141,14 +141,34 @@ function brown_almost_linear!(y, x)
 end
 
 function trigonometric!(y, x)
-    for i in x, j in eachindex(y)
-        y[j] = cos(i)
+    for i in x
+        for j in eachindex(y)
+            y[j] = cos(i)
+        end
     end
     c = sum(y)
     n = length(x)
-    for i in x, j in eachindex(y)
-        y[j] = sin(i) * y[j] + n - c
+    for i in x
+        for j in eachindex(y)
+            y[j] = sin(i) * y[j] + n - c
+        end
     end
+    return nothing
+end
+
+function mutation_test_1!(y, x)
+    y[1] = x[1]
+    y[1] = y[1] * x[2]
+    y[2] = y[2] * x[3]
+    y[3] = sum(y)
+    return nothing
+end
+
+function mutation_test_2!(y, x)
+    y[1] *= x[1]
+    y[2] *= x[1]
+    y[1] *= x[2]
+    y[2] *= x[2]
     return nothing
 end
 
@@ -160,6 +180,10 @@ chebyquad(x) = (y = zeros(x); chebyquad!(y, x); return y)
 
 brown_almost_linear(x) = (y = zeros(x); brown_almost_linear!(y, x); return y)
 
-trigonometric(x) = (y = zeros(x); trigonometric!(y, x); return y)
+trigonometric(x) = (y = ones(x); trigonometric!(y, x); return y)
+
+mutation_test_1(x) = (y = zeros(x); mutation_test_1!(y, x); return y)
+
+mutation_test_2(x) = (y = ones(x); mutation_test_2!(y, x); return y)
 
 arr2arr_1(x) = (sum(x .* x); zeros(x))
