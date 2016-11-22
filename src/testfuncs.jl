@@ -56,7 +56,12 @@ function rosenbrock_2(x)
 end
 
 rosenbrock_3(x) = sum(map((i, j) -> (1 - j)^2 + 100*(i - j^2)^2, x[2:end], x[1:end-1]))
-rosenbrock_4(x) = sum((1 - x[1:end-1]).^2 + 100*(x[2:end] - x[1:end-1].^2).^2)
+
+function rosenbrock_4(x)
+    t1 = (1 + x[1:end-1]).^2
+    t2 = x[2:end] + (x[1:end-1]).^2
+    return sum(t1 + 100 * (@compat(abs.(t2)).^2))
+end
 
 function ackley(x)
     a, b, c = 20.0, -0.2, 2.0*π
