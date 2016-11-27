@@ -13,6 +13,7 @@ num2num_2(x) = 2*x + sqrt(x*x*x)
 num2num_3(x) = 10.31^(x + x) - x
 num2num_4(x) = x
 num2num_5(x) = 1
+num2num_6(x) = 1. / (1. + exp(-x))
 
 #######################
 # f(x::Number)::Array #

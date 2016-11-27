@@ -20,7 +20,8 @@ assumptions:
 - Matrix inputs for n-ary functions are of equal shape
 =#
 
-const NUMBER_TO_NUMBER_FUNCS = (num2num_1, num2num_2, num2num_3, num2num_4, num2num_5)
+const NUMBER_TO_NUMBER_FUNCS = (num2num_1, num2num_2, num2num_3,
+                                num2num_4, num2num_5, num2num_6)
 
 const NUMBER_TO_ARRAY_FUNCS = (num2arr_1,)
 
