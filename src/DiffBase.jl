@@ -35,7 +35,7 @@ const INPLACE_ARRAY_TO_ARRAY_FUNCS = (chebyquad!, brown_almost_linear!, trigonom
                                       mutation_test_1!, mutation_test_2!)
 
 const ARRAY_TO_ARRAY_FUNCS = (-, chebyquad, brown_almost_linear, trigonometric, arr2arr_1,
-                              mutation_test_1, mutation_test_2)
+                              arr2arr_2, mutation_test_1, mutation_test_2)
 
 const MATRIX_TO_MATRIX_FUNCS = (inv,)
 

@@ -193,3 +193,5 @@ mutation_test_1(x) = (y = zeros(x); mutation_test_1!(y, x); return y)
 mutation_test_2(x) = (y = ones(x); mutation_test_2!(y, x); return y)
 
 arr2arr_1(x) = (sum(x .* x); zeros(x))
+
+arr2arr_2(x) = x[1, :] .+ x[1, :] .+ first(x)
