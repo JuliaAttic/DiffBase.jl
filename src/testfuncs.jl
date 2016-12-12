@@ -98,6 +98,8 @@ function mat2num_3(x)
     return sum(map(n -> sqrt(abs(n) + n^2) * 0.5, A))
 end
 
+softmax(x) = sum(exp.(x) ./ sum(exp.(x), 2))
+
 ###########################################
 # f(::Matrix, ::Matrix, ::Matrix)::Number #
 ###########################################
