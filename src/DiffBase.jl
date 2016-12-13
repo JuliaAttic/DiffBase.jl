@@ -29,7 +29,7 @@ const VECTOR_TO_NUMBER_FUNCS = (vec2num_1, vec2num_2,  vec2num_3, vec2num_4,
                                 rosenbrock_1, rosenbrock_2, rosenbrock_3, rosenbrock_4,
                                 ackley, self_weighted_logit)
 
-const MATRIX_TO_NUMBER_FUNCS = (det, mat2num_1, mat2num_2, mat2num_3, softmax)
+const MATRIX_TO_NUMBER_FUNCS = (det, mat2num_1, mat2num_2, mat2num_3, mat2num_4, softmax)
 
 const INPLACE_ARRAY_TO_ARRAY_FUNCS = (chebyquad!, brown_almost_linear!, trigonometric!,
                                       mutation_test_1!, mutation_test_2!)

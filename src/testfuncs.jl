@@ -98,6 +98,8 @@ function mat2num_3(x)
     return sum(map(n -> sqrt(abs(n) + n^2) * 0.5, A))
 end
 
+mat2num_4(x) = mean(sum(sin.(x) * x, 2))
+
 softmax(x) = sum(@compat(exp.(x)) ./ sum(@compat(exp.(x)), 2))
 
 ###########################################
