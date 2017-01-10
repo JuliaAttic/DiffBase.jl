@@ -39,7 +39,19 @@ const ARRAY_TO_ARRAY_FUNCS = (-, chebyquad, brown_almost_linear, trigonometric, 
 
 const MATRIX_TO_MATRIX_FUNCS = (inv,)
 
-const BINARY_MATRIX_TO_MATRIX_FUNCS = (+, .+, -, .-, *, .*, ./, .^,
+if VERSION >= v"0.6.0-dev.1614"
+    const BINARY_BROADCAST_OPS = ((a, b) -> broadcast(+, a, b),
+                                  (a, b) -> broadcast(-, a, b),
+                                  (a, b) -> broadcast(*, a, b),
+                                  (a, b) -> broadcast(/, a, b),
+                                  (a, b) -> broadcast(\, a, b),
+                                  (a, b) -> broadcast(^, a, b))
+else
+    const BINARY_BROADCAST_OPS = (.+, .-, .*, ./, .\, .^)
+end
+
+const BINARY_MATRIX_TO_MATRIX_FUNCS = (+, -, *, /, \,
+                                       BINARY_BROADCAST_OPS...,
                                        A_mul_Bt, At_mul_B, At_mul_Bt,
                                        A_mul_Bc, Ac_mul_B, Ac_mul_Bc)
 
