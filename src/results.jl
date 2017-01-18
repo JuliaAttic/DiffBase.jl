@@ -5,7 +5,7 @@
 type DiffResult{O,V,D<:Tuple}
     value::V
     derivs::D # ith element = ith-order derivative
-    DiffResult{O}(value::V, derivs::NTuple{O}) = new(value, derivs)
+    DiffResult{O}(value::V, derivs::NTuple{O,Any}) = new(value, derivs)
 end
 
 """
@@ -17,7 +17,7 @@ and derivatives will be stored in the provided `derivs` storage.
 Note that the arguments can be `Number`s or `AbstractArray`s, depending on the dimensionality
 of your target function.
 """
-DiffResult{V,O}(value::V, derivs::NTuple{O}) = DiffResult{O,V,typeof(derivs)}(value, derivs)
+DiffResult{V,O}(value::V, derivs::NTuple{O,Any}) = DiffResult{O,V,typeof(derivs)}(value, derivs)
 
 """
     DiffResult(value, derivs...)
