@@ -38,6 +38,7 @@ vec2num_1(x) = (exp(x[1]) + log(x[3]) * x[4]) / x[5]
 vec2num_2(x) = x[1]*x[2] + sin(x[1])
 vec2num_3(x) = vecnorm(x' .* x)
 vec2num_4(x) = ((sum(x) + prod(x)); 1)
+vec2num_5(x) = sum((-x).^3)
 
 function rosenbrock_1(x)
     a = one(eltype(x))
