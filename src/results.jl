@@ -5,8 +5,9 @@
 @compat type DiffResult{O,V,D<:Tuple}
     value::V
     derivs::D # ith element = ith-order derivative
-    (::Type{DiffResult{O,V,D}}){O2,O,V,D}(value::V, derivs::NTuple{O2,Any}) =
-        new{O,V,D}(value, derivs)
+    function (::Type{DiffResult{O,V,D}}){O,V,D}(value::V, derivs::NTuple{O,Any})
+        return new{O,V,D}(value, derivs)
+    end
 end
 
 """
