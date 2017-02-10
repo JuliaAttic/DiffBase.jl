@@ -2,10 +2,11 @@
 # DiffResult #
 ##############
 
-type DiffResult{O,V,D<:Tuple}
+@compat type DiffResult{O,V,D<:Tuple}
     value::V
     derivs::D # ith element = ith-order derivative
-    DiffResult{O}(value::V, derivs::NTuple{O,Any}) = new(value, derivs)
+    (::Type{DiffResult{O,V,D}}){O2,O,V,D}(value::V, derivs::NTuple{O2,Any}) =
+        new{O,V,D}(value, derivs)
 end
 
 """
