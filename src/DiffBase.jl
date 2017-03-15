@@ -27,7 +27,7 @@ const NUMBER_TO_ARRAY_FUNCS = (num2arr_1,)
 
 const VECTOR_TO_NUMBER_FUNCS = (vec2num_1, vec2num_2,  vec2num_3, vec2num_4, vec2num_5,
                                 rosenbrock_1, rosenbrock_2, rosenbrock_3, rosenbrock_4,
-                                ackley, self_weighted_logit)
+                                ackley, self_weighted_logit, first)
 
 const MATRIX_TO_NUMBER_FUNCS = (det, mat2num_1, mat2num_2, mat2num_3, mat2num_4, softmax)
 
