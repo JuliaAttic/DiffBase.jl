@@ -1,11 +1,10 @@
-isdefined(Base, :__precompile__) && __precompile__()
+__precompile__()
 
 module DiffBase
 
-using Compat
-
 include("results.jl")
 include("testfuncs.jl")
+include("rules.jl")
 
 ######################
 # Test Function Sets #
