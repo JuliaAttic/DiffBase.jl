@@ -10,17 +10,7 @@ function finitediff(f, x)
     return (f(x + ϵ) - f(x - ϵ)) / (ϵ + ϵ)
 end
 
-for f in RealInterface.UNARY_ARITHMETIC
-    if !(in(f, DiffBase.TODO))
-        deriv = DiffRule{f}(:x)
-        @eval begin
-            x = rand()
-            @test isapprox($deriv, finitediff($f, x), rtol=0.05)
-        end
-    end
-end
-
-for f in RealInterface.UNARY_MATH
+for f in vcat(RealInterface.UNARY_ARITHMETIC, RealInterface.UNARY_MATH, RealInterface.UNARY_SPECIAL_MATH)
     if !(in(f, DiffBase.TODO))
         deriv = DiffRule{f}(:x)
         modifier = in(f, (:asec, :acsc, :asecd, :acscd, :acosh, :acoth)) ? 1 : 0
@@ -31,12 +21,20 @@ for f in RealInterface.UNARY_MATH
     end
 end
 
-for f in RealInterface.UNARY_SPECIAL_MATH
+for f in vcat(RealInterface.BINARY_SPECIAL_MATH, RealInterface.BINARY_ARITHMETIC)
     if !(in(f, DiffBase.TODO))
-        deriv = DiffRule{f}(:x)
+        derivs = DiffRule{f}(:x, :y)
         @eval begin
-            x = rand()
-            @test isapprox($deriv, finitediff($f, x), rtol=0.05)
+            x, y = rand(2)
+            dx, dy = $(derivs[1]), $(derivs[2])
+
+            if !(isnan(dx))
+                @test isapprox(dx, finitediff(z -> $f(z, y), x), rtol=0.05)
+            end
+
+            if !(isnan(dy))
+                @test isapprox(dy, finitediff(z -> $f(x, z), y), rtol=0.05)
+            end
         end
     end
 end
