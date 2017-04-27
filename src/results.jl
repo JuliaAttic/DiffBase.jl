@@ -2,7 +2,7 @@
 # DiffResult #
 ##############
 
-struct DiffResult{O,V,D<:Tuple}
+mutable struct DiffResult{O,V,D<:Tuple}
     value::V
     derivs::D # ith element = ith-order derivative
     function DiffResult{O,V,D}(value::V, derivs::NTuple{O,Any}) where {O,V,D}
