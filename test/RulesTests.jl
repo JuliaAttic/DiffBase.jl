@@ -25,11 +25,11 @@ for f in vcat(RealInterface.BINARY_SPECIAL_MATH, RealInterface.BINARY_ARITHMETIC
     if !(in(f, DiffBase.TODO))
         derivs = DiffRule{f}(:x, :y)
         @eval begin
-            x, y = rand(2)
+            x, y = rand(1:10), rand()
             dx, dy = $(derivs[1]), $(derivs[2])
 
             if !(isnan(dx))
-                @test isapprox(dx, finitediff(z -> $f(z, y), x), rtol=0.05)
+                @test isapprox(dx, finitediff(z -> $f(z, y), float(x)), rtol=0.05)
             end
 
             if !(isnan(dy))

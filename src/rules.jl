@@ -8,7 +8,7 @@ end
 
 const TODO = Symbol[:abs, :mod, :eta, :zeta, :airyaix, :airyaiprimex, :airybix,
                     :airybiprimex, :besseljx, :besselyx, :besselix, :besselkx, :besselh,
-                    :besselhx, :hankelh1x, :hankelh2, :hankelh2x, :polygamma]
+                    :besselhx, :hankelh1x, :hankelh2, :hankelh2x]
 
 ################
 # General Math #
@@ -109,9 +109,10 @@ const TODO = Symbol[:abs, :mod, :eta, :zeta, :airyaix, :airyaiprimex, :airybix,
 # binary #
 #--------#
 
-@diffrule(:besselj)(ν, x)  = :(NaN), :(  (besselj($ν - 1, $x) - besselj($ν + 1, $x)) / 2   )
-@diffrule(:besseli)(ν, x)  = :(NaN), :(  (besseli($ν - 1, $x) + besseli($ν + 1, $x)) / 2   )
-@diffrule(:bessely)(ν, x)  = :(NaN), :(  (bessely($ν - 1, $x) - bessely($ν + 1, $x)) / 2   )
-@diffrule(:besselk)(ν, x)  = :(NaN), :( -(besselk($ν - 1, $x) + besselk($ν + 1, $x)) / 2   )
-@diffrule(:hankelh1)(ν, x) = :(NaN), :(  (hankelh1($ν - 1, $x) - hankelh1($ν + 1, $x)) / 2 )
-@diffrule(:hankelh2)(ν, x) = :(NaN), :(  (hankelh2($ν - 1, $x) - hankelh2($ν + 1, $x)) / 2 )
+@diffrule(:besselj)(ν, x)   = :NaN, :(  (besselj($ν - 1, $x) - besselj($ν + 1, $x)) / 2   )
+@diffrule(:besseli)(ν, x)   = :NaN, :(  (besseli($ν - 1, $x) + besseli($ν + 1, $x)) / 2   )
+@diffrule(:bessely)(ν, x)   = :NaN, :(  (bessely($ν - 1, $x) - bessely($ν + 1, $x)) / 2   )
+@diffrule(:besselk)(ν, x)   = :NaN, :( -(besselk($ν - 1, $x) + besselk($ν + 1, $x)) / 2   )
+@diffrule(:hankelh1)(ν, x)  = :NaN, :(  (hankelh1($ν - 1, $x) - hankelh1($ν + 1, $x)) / 2 )
+@diffrule(:hankelh2)(ν, x)  = :NaN, :(  (hankelh2($ν - 1, $x) - hankelh2($ν + 1, $x)) / 2 )
+@diffrule(:polygamma)(m, x) = :NaN, :(  polygamma($m + 1, $x)                             )
