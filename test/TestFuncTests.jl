@@ -25,7 +25,7 @@ for f in DiffBase.TERNARY_MATRIX_TO_NUMBER_FUNCS
     @test isa(f(A, B, x), Number)
 end
 
-# f returns Array,
+# f returns Array
 
 for f in DiffBase.NUMBER_TO_ARRAY_FUNCS
     @test isa(f(n), Array)
@@ -50,5 +50,8 @@ for f! in DiffBase.INPLACE_ARRAY_TO_ARRAY_FUNCS
     @test isa(f!(y, x), Void)
 end
 
+for f! in DiffBase.INPLACE_NUMBER_TO_ARRAY_FUNCS
+    @test isa(f!(y, n), Void)
+end
 
 end # module
