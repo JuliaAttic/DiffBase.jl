@@ -1,7 +1,7 @@
 using Base.Test
 using RealInterface
 using SpecialFunctions
-using DiffBase: DiffRule
+using DiffBase
 
 srand(1)
 
@@ -11,8 +11,8 @@ function finitediff(f, x)
 end
 
 for f in vcat(RealInterface.UNARY_ARITHMETIC, RealInterface.UNARY_MATH, RealInterface.UNARY_SPECIAL_MATH)
-    if !(in(f, DiffBase.TODO))
-        deriv = DiffRule{f}(:x)
+    if DiffBase.hasdiffrule(f, 1)
+        deriv = DiffBase.diffrule(f, :x)
         modifier = in(f, (:asec, :acsc, :asecd, :acscd, :acosh, :acoth)) ? 1 : 0
         @eval begin
             x = rand() + $modifier
@@ -21,9 +21,9 @@ for f in vcat(RealInterface.UNARY_ARITHMETIC, RealInterface.UNARY_MATH, RealInte
     end
 end
 
-for f in vcat(RealInterface.BINARY_SPECIAL_MATH, RealInterface.BINARY_ARITHMETIC)
-    if !(in(f, DiffBase.TODO))
-        derivs = DiffRule{f}(:x, :y)
+for f in vcat(RealInterface.BINARY_MATH, RealInterface.BINARY_ARITHMETIC, RealInterface.BINARY_SPECIAL_MATH)
+    if DiffBase.hasdiffrule(f, 2)
+        derivs = DiffBase.diffrule(f, :x, :y)
         @eval begin
             x, y = rand(1:10), rand()
             dx, dy = $(derivs[1]), $(derivs[2])
