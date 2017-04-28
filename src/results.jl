@@ -2,10 +2,10 @@
 # DiffResult #
 ##############
 
-@compat type DiffResult{O,V,D<:Tuple}
+mutable struct DiffResult{O,V,D<:Tuple}
     value::V
     derivs::D # ith element = ith-order derivative
-    function (::Type{DiffResult{O,V,D}}){O,V,D}(value::V, derivs::NTuple{O,Any})
+    function DiffResult{O,V,D}(value::V, derivs::NTuple{O,Any}) where {O,V,D}
         return new{O,V,D}(value, derivs)
     end
 end
@@ -80,7 +80,7 @@ HessianResult(x::AbstractArray) = DiffResult(first(x), similar(x), similar(x, le
 Base.eltype(r::DiffResult) = eltype(typeof(r))
 Base.eltype{O,V,D}(::Type{DiffResult{O,V,D}}) = eltype(V)
 
-@compat Base.:(==)(a::DiffResult, b::DiffResult) = a.value == b.value && a.derivs == b.derivs
+Base.:(==)(a::DiffResult, b::DiffResult) = a.value == b.value && a.derivs == b.derivs
 
 Base.copy(r::DiffResult) = DiffResult(copy(r.value), map(copy, r.derivs))
 

@@ -61,7 +61,7 @@ rosenbrock_3(x) = sum(map((i, j) -> (1 - j)^2 + 100*(i - j^2)^2, x[2:end], x[1:e
 function rosenbrock_4(x)
     t1 = (1 + x[1:end-1]).^2
     t2 = x[2:end] + (x[1:end-1]).^2
-    return sum(t1 + 100 * (@compat(abs.(t2)).^2))
+    return sum(t1 + 100 * (abs.(t2)).^2)
 end
 
 function ackley(x)
@@ -88,7 +88,7 @@ mat2num_1(x) = det(first(x) * inv(x * x) + x)
 function mat2num_2(x)
     a = reshape(x, length(x), 1)
     b = reshape(copy(x), 1, length(x))
-    return trace(@compat(log.((1 .+ (a * b)) .+ a .- b)))
+    return trace(log.((1 .+ (a * b)) .+ a .- b))
 end
 
 function mat2num_3(x)
@@ -98,16 +98,16 @@ function mat2num_3(x)
     return sum(map(n -> sqrt(abs(n) + n^2) * 0.5, A))
 end
 
-mat2num_4(x) = mean(sum(@compat(sin.(x)) * x, 2))
+mat2num_4(x) = mean(sum(sin.(x) * x, 2))
 
-softmax(x) = sum(@compat(exp.(x)) ./ sum(@compat(exp.(x)), 2))
+softmax(x) = sum(exp.(x) ./ sum(exp.(x), 2))
 
 ###########################################
 # f(::Matrix, ::Matrix, ::Matrix)::Number #
 ###########################################
 
-relu(x) = @compat(log.(1.0 .+ @compat(exp.(x))))
-sigmoid(n) = 1. / (1. + @compat(exp.(-n)))
+relu(x) = log.(1.0 .+ exp.(x))
+sigmoid(n) = 1. / (1. + exp.(-n))
 neural_step(x1, w1, w2) = sigmoid(dot(w2[1:size(w1, 2)], relu(w1 * x1[1:size(w1, 2)])))
 
 ################################
