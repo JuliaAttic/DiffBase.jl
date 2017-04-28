@@ -1,12 +1,23 @@
 #=
-Some of the below test functions have been modified from their original form to to allow for
-tunable input/output sizes, or to test certain programmatic behaviors. Thus, one should not
-expect these functions to be "correct" for their original purpose.
+These functions are organized in sets based on input/output type. They are unary and not
+in-place unless otherwised specified. These functions have been written with the following
+assumptions:
+
+- Array input is of length >= 5
+- Matrix input is square
+- Matrix inputs for n-ary functions are of equal shape
+
+Some of these functions have been modified from their original form to to allow for tunable
+input/output sizes, or to test certain programmatic behaviors. Thus, regardless of their
+names, one should not expect these functions to be "correct" for their original purpose.
 =#
 
 ########################
 # f(x::Number)::Number #
 ########################
+
+const NUMBER_TO_NUMBER_FUNCS = (num2num_1, num2num_2, num2num_3,
+                                num2num_4, num2num_5, identity)
 
 num2num_1(x) = sin(x)^2 / cos(x)^2
 num2num_2(x) = 2*x + sqrt(x*x*x)
@@ -17,6 +28,8 @@ num2num_5(x) = 1. / (1. + exp(-x))
 #######################
 # f(x::Number)::Array #
 #######################
+
+const NUMBER_TO_ARRAY_FUNCS = (num2arr_1,)
 
 function num2arr_1(x)
     return reshape([num2num_1(x),
@@ -29,9 +42,27 @@ function num2arr_1(x)
                     num2num_3(x)], 2, 2, 2)
 end
 
+#################################
+# f!(y::Array, x::Number)::Void #
+#################################
+
+const INPLACE_NUMBER_TO_ARRAY_FUNCS = (num2arr_1!,)
+
+function num2arr_1!(y, x)
+    fill!(y, zero(x))
+    for i in 2:length(y)
+        y[i] = (sin(x) + y[i-1])^2
+    end
+    return nothing
+end
+
 ########################
 # f(x::Vector)::Number #
 ########################
+
+const VECTOR_TO_NUMBER_FUNCS = (vec2num_1, vec2num_2,  vec2num_3, vec2num_4, vec2num_5,
+                                rosenbrock_1, rosenbrock_2, rosenbrock_3, rosenbrock_4,
+                                ackley, self_weighted_logit, first)
 
 vec2num_1(x) = (exp(x[1]) + log(x[3]) * x[4]) / x[5]
 vec2num_2(x) = x[1]*x[2] + sin(x[1])
@@ -83,6 +114,8 @@ self_weighted_logit(x) = inv(1.0 + exp(-dot(x, x)))
 # f(x::Matrix)::Number #
 ########################
 
+const MATRIX_TO_NUMBER_FUNCS = (det, mat2num_1, mat2num_2, mat2num_3, mat2num_4, softmax)
+
 mat2num_1(x) = det(first(x) * inv(x * x) + x)
 
 function mat2num_2(x)
@@ -102,9 +135,20 @@ mat2num_4(x) = mean(sum(sin.(x) * x, 2))
 
 softmax(x) = sum(exp.(x) ./ sum(exp.(x), 2))
 
+#################################
+# f(::Matrix, ::Matrix)::Number #
+#################################
+
+const BINARY_MATRIX_TO_MATRIX_FUNCS = (+, -, *, /, \,
+                                       BINARY_BROADCAST_OPS...,
+                                       A_mul_Bt, At_mul_B, At_mul_Bt,
+                                       A_mul_Bc, Ac_mul_B, Ac_mul_Bc)
+
 ###########################################
 # f(::Matrix, ::Matrix, ::Matrix)::Number #
 ###########################################
+
+const TERNARY_MATRIX_TO_NUMBER_FUNCS = (neural_step,)
 
 relu(x) = log.(1.0 .+ exp.(x))
 sigmoid(n) = 1. / (1. + exp.(-n))
@@ -113,9 +157,11 @@ neural_step(x1, w1, w2) = sigmoid(dot(w2[1:size(w1, 2)], relu(w1 * x1[1:size(w1,
 ################################
 # f!(y::Array, x::Array)::Void #
 ################################
-
 # Credit for `chebyquad!`, `brown_almost_linear!`, and `trigonometric!` goes to
 # Kristoffer Carlsson (@KristofferC).
+
+const INPLACE_ARRAY_TO_ARRAY_FUNCS = (chebyquad!, brown_almost_linear!, trigonometric!,
+                                      mutation_test_1!, mutation_test_2!)
 
 function chebyquad!(y, x)
     tk = 1/length(x)
@@ -186,6 +232,9 @@ end
 # f(x::Array)::Array #
 ######################
 
+const ARRAY_TO_ARRAY_FUNCS = (-, chebyquad, brown_almost_linear, trigonometric, arr2arr_1,
+                              arr2arr_2, mutation_test_1, mutation_test_2, identity)
+
 chebyquad(x) = (y = zeros(x); chebyquad!(y, x); return y)
 
 brown_almost_linear(x) = (y = zeros(x); brown_almost_linear!(y, x); return y)
@@ -199,3 +248,24 @@ mutation_test_2(x) = (y = ones(x); mutation_test_2!(y, x); return y)
 arr2arr_1(x) = (sum(x .* x); zeros(x))
 
 arr2arr_2(x) = x[1, :] .+ x[1, :] .+ first(x)
+
+#######################
+# f(::Matrix)::Matrix #
+#######################
+
+const MATRIX_TO_MATRIX_FUNCS = (inv,)
+
+####################
+# binary broadcast #
+####################
+
+if VERSION >= v"0.6.0-dev.1614"
+    const BINARY_BROADCAST_OPS = ((a, b) -> broadcast(+, a, b),
+                                  (a, b) -> broadcast(-, a, b),
+                                  (a, b) -> broadcast(*, a, b),
+                                  (a, b) -> broadcast(/, a, b),
+                                  (a, b) -> broadcast(\, a, b),
+                                  (a, b) -> broadcast(^, a, b))
+else
+    const BINARY_BROADCAST_OPS = (.+, .-, .*, ./, .\, .^)
+end
