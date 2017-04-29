@@ -1,7 +1,6 @@
 module ResultTests
 
 using DiffBase
-using Compat
 using Base.Test
 
 using DiffBase: DiffResult, GradientResult, JacobianResult, HessianResult,
@@ -61,7 +60,7 @@ value!(rn, n0)
 
 x0_new, x0_copy = rand(k), copy(x0)
 value!(exp, rx, x0_new)
-@test value(rx) === x0 == @compat(exp.(x0_new))
+@test value(rx) === x0 == exp.(x0_new)
 value!(rx, x0_copy)
 
 # derivative/derivative! #
@@ -97,7 +96,7 @@ derivative!(rn, n1)
 
 x1_new, x1_copy = rand(k, k), copy(x1)
 derivative!(exp, rx, x1_new)
-@test derivative(rx) === x1 == @compat(exp.(x1_new))
+@test derivative(rx) === x1 == exp.(x1_new)
 derivative!(exp, rx, x1_copy)
 
 derivative!(exp, rn, n1, Val{2})
@@ -106,7 +105,7 @@ derivative!(rn, n2, Val{2})
 
 x2_new, x2_copy = rand(k, k, k), copy(x2)
 derivative!(exp, rx, x2_new, Val{2})
-@test derivative(rx, Val{2}) === x2 == @compat(exp.(x2_new))
+@test derivative(rx, Val{2}) === x2 == exp.(x2_new)
 derivative!(exp, rx, x2_copy, Val{2})
 
 # gradient/gradient! #
@@ -119,7 +118,7 @@ gradient!(rx, x1_copy)
 
 x1_new, x1_copy = rand(k, k), copy(x1)
 gradient!(exp, rx, x1_new)
-@test gradient(rx) === x1 == @compat(exp.(x1_new))
+@test gradient(rx) === x1 == exp.(x1_new)
 gradient!(exp, rx, x1_copy)
 
 # jacobian/jacobian! #
@@ -132,7 +131,7 @@ jacobian!(rx, x1_copy)
 
 x1_new, x1_copy = rand(k, k), copy(x1)
 jacobian!(exp, rx, x1_new)
-@test jacobian(rx) === x1 == @compat(exp.(x1_new))
+@test jacobian(rx) === x1 == exp.(x1_new)
 jacobian!(exp, rx, x1_copy)
 
 # hessian/hessian! #
@@ -145,7 +144,7 @@ hessian!(rx, x2_copy)
 
 x2_new, x2_copy = rand(k, k, k), copy(x2)
 hessian!(exp, rx, x2_new)
-@test hessian(rx) === x2 == @compat(exp.(x2_new))
+@test hessian(rx) === x2 == exp.(x2_new)
 hessian!(exp, rx, x2_copy)
 
 end # module
