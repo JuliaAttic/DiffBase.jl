@@ -1,8 +1,7 @@
-# DiffBase.jl
+# DiffBase
 
-DiffBase is a Julia package that provides common utilities and test functions that
-are used by various JuliaDiff packages.
+DiffBase provides common utilities employed by various JuliaDiff packages, including:
 
-If you're a user of any JuliaDiff packages, you may want to check out DiffBase's
-[DiffResult API](diffresult.md), which can be used in conjunction with other packages
-in order to compute multiple orders of derivatives simultaneously.
+- The `DiffResult` API for extracting multiple orders of derivatives simultaneously
+- The `diffrule` API for defining reusable derivative definitions
+- A suite of test functions for stressing the robustness of differentiation tools
