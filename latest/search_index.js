@@ -93,7 +93,7 @@ var documenterSearchIndex = {"docs": [
     "page": "DiffResult API",
     "title": "DiffBase.gradient",
     "category": "Function",
-    "text": "gradient(r::DiffResult)\n\nReturn the gradient stored in r.\n\nEquivalent to derivative(r, Val{1}); see derivative docs for aliasing behavior.\n\n\n\n"
+    "text": "gradient(r::DiffResult)\n\nReturn the gradient stored in r.\n\nEquivalent to derivative(r, Val{1}).\n\n\n\n"
 },
 
 {
@@ -101,7 +101,7 @@ var documenterSearchIndex = {"docs": [
     "page": "DiffResult API",
     "title": "DiffBase.jacobian",
     "category": "Function",
-    "text": "jacobian(r::DiffResult)\n\nReturn the Jacobian stored in r.\n\nEquivalent to derivative(r, Val{1}); see derivative docs for aliasing behavior.\n\n\n\n"
+    "text": "jacobian(r::DiffResult)\n\nReturn the Jacobian stored in r.\n\nEquivalent to derivative(r, Val{1}).\n\n\n\n"
 },
 
 {
@@ -109,7 +109,7 @@ var documenterSearchIndex = {"docs": [
     "page": "DiffResult API",
     "title": "DiffBase.hessian",
     "category": "Function",
-    "text": "hessian(r::DiffResult)\n\nReturn the Hessian stored in r.\n\nEquivalent to derivative(r, Val{2}); see derivative docs for aliasing behavior.\n\n\n\n"
+    "text": "hessian(r::DiffResult)\n\nReturn the Hessian stored in r.\n\nEquivalent to derivative(r, Val{2}).\n\n\n\n"
 },
 
 {
