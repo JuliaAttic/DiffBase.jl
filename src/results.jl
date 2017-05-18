@@ -243,7 +243,7 @@ end
 
 Return the gradient stored in `r`.
 
-Equivalent to `derivative(r, Val{1})`; see `derivative` docs for aliasing behavior.
+Equivalent to `derivative(r, Val{1})`.
 """
 gradient(r::DiffResult) = derivative(r)
 
@@ -271,7 +271,7 @@ gradient!(f, r::DiffResult, x) = derivative!(f, r, x)
 
 Return the Jacobian stored in `r`.
 
-Equivalent to `derivative(r, Val{1})`; see `derivative` docs for aliasing behavior.
+Equivalent to `derivative(r, Val{1})`.
 """
 jacobian(r::DiffResult) = derivative(r)
 
@@ -299,7 +299,7 @@ jacobian!(f, r::DiffResult, x) = derivative!(f, r, x)
 
 Return the Hessian stored in `r`.
 
-Equivalent to `derivative(r, Val{2})`; see `derivative` docs for aliasing behavior.
+Equivalent to `derivative(r, Val{2})`.
 """
 hessian(r::DiffResult) = derivative(r, Val{2})
 
