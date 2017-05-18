@@ -3,11 +3,11 @@
 [![Build Status](https://travis-ci.org/JuliaDiff/DiffBase.jl.svg?branch=master)](https://travis-ci.org/JuliaDiff/DiffBase.jl)
 [![Coverage Status](https://coveralls.io/repos/github/JuliaDiff/DiffBase.jl/badge.svg?branch=master)](https://coveralls.io/github/JuliaDiff/DiffBase.jl?branch=master)
 
-**[Go to DiffBase's Documentation](http://www.juliadiff.org/DiffBase.jl/)**
+[![](https://img.shields.io/badge/docs-stable-blue.svg)](http://www.juliadiff.org/DiffBase.jl/stable)
+[![](https://img.shields.io/badge/docs-latest-blue.svg)](http://www.juliadiff.org/DiffBase.jl/latest)
 
-DiffBase is a Julia package that provides common utilities and test functions that are used
-by various JuliaDiff packages.
+DiffBase provides common utilities employed by various JuliaDiff packages, including:
 
-If you're a user of any JuliaDiff packages, you may want to check out DiffBase's [DiffResult
-API](http://www.juliadiff.org/DiffBase.jl/diffresult/), which can be used in conjunction
-with other packages in order to compute multiple orders of derivatives simultaneously.
+- The `DiffResult` API for extracting multiple orders of derivatives simultaneously
+- The `diffrule` API for defining reusable derivative definitions
+- A suite of test functions for stressing the robustness of differentiation tools
