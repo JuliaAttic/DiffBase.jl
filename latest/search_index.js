@@ -17,7 +17,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#",
+    "location": "diffresult_api.html#",
     "page": "DiffResult API",
     "title": "DiffResult API",
     "category": "page",
@@ -25,7 +25,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffResult-API-1",
+    "location": "diffresult_api.html#DiffResult-API-1",
     "page": "DiffResult API",
     "title": "DiffResult API",
     "category": "section",
@@ -33,7 +33,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.DiffResult",
+    "location": "diffresult_api.html#DiffBase.DiffResult",
     "page": "DiffResult API",
     "title": "DiffBase.DiffResult",
     "category": "Type",
@@ -41,7 +41,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.JacobianResult",
+    "location": "diffresult_api.html#DiffBase.JacobianResult",
     "page": "DiffResult API",
     "title": "DiffBase.JacobianResult",
     "category": "Function",
@@ -49,7 +49,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.GradientResult",
+    "location": "diffresult_api.html#DiffBase.GradientResult",
     "page": "DiffResult API",
     "title": "DiffBase.GradientResult",
     "category": "Function",
@@ -57,7 +57,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.HessianResult",
+    "location": "diffresult_api.html#DiffBase.HessianResult",
     "page": "DiffResult API",
     "title": "DiffBase.HessianResult",
     "category": "Function",
@@ -65,7 +65,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#Constructing-DiffResults-1",
+    "location": "diffresult_api.html#Constructing-DiffResults-1",
     "page": "DiffResult API",
     "title": "Constructing DiffResults",
     "category": "section",
@@ -73,7 +73,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.value",
+    "location": "diffresult_api.html#DiffBase.value",
     "page": "DiffResult API",
     "title": "DiffBase.value",
     "category": "Function",
@@ -81,7 +81,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.derivative",
+    "location": "diffresult_api.html#DiffBase.derivative",
     "page": "DiffResult API",
     "title": "DiffBase.derivative",
     "category": "Function",
@@ -89,7 +89,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.gradient",
+    "location": "diffresult_api.html#DiffBase.gradient",
     "page": "DiffResult API",
     "title": "DiffBase.gradient",
     "category": "Function",
@@ -97,7 +97,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.jacobian",
+    "location": "diffresult_api.html#DiffBase.jacobian",
     "page": "DiffResult API",
     "title": "DiffBase.jacobian",
     "category": "Function",
@@ -105,7 +105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.hessian",
+    "location": "diffresult_api.html#DiffBase.hessian",
     "page": "DiffResult API",
     "title": "DiffBase.hessian",
     "category": "Function",
@@ -113,7 +113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#Accessing-data-from-DiffResults-1",
+    "location": "diffresult_api.html#Accessing-data-from-DiffResults-1",
     "page": "DiffResult API",
     "title": "Accessing data from DiffResults",
     "category": "section",
@@ -121,7 +121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.value!",
+    "location": "diffresult_api.html#DiffBase.value!",
     "page": "DiffResult API",
     "title": "DiffBase.value!",
     "category": "Function",
@@ -129,7 +129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.derivative!",
+    "location": "diffresult_api.html#DiffBase.derivative!",
     "page": "DiffResult API",
     "title": "DiffBase.derivative!",
     "category": "Function",
@@ -137,7 +137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.gradient!",
+    "location": "diffresult_api.html#DiffBase.gradient!",
     "page": "DiffResult API",
     "title": "DiffBase.gradient!",
     "category": "Function",
@@ -145,7 +145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.jacobian!",
+    "location": "diffresult_api.html#DiffBase.jacobian!",
     "page": "DiffResult API",
     "title": "DiffBase.jacobian!",
     "category": "Function",
@@ -153,7 +153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#DiffBase.hessian!",
+    "location": "diffresult_api.html#DiffBase.hessian!",
     "page": "DiffResult API",
     "title": "DiffBase.hessian!",
     "category": "Function",
@@ -161,11 +161,51 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "diffresultapi.html#Mutating-DiffResults-1",
+    "location": "diffresult_api.html#Mutating-DiffResults-1",
     "page": "DiffResult API",
     "title": "Mutating DiffResults",
     "category": "section",
     "text": "DiffBase.value!\nDiffBase.derivative!\nDiffBase.gradient!\nDiffBase.jacobian!\nDiffBase.hessian!"
+},
+
+{
+    "location": "diffrule_api.html#",
+    "page": "diffrule API",
+    "title": "diffrule API",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "diffrule_api.html#DiffBase.@define_diffrule",
+    "page": "diffrule API",
+    "title": "DiffBase.@define_diffrule",
+    "category": "Macro",
+    "text": "@define_diffrule f(x) = :(df_dx($x))\n@define_diffrule f(x, y) = :(df_dx($x, $y)), :(df_dy($x, $y))\n⋮\n\nDefine a new differentiation rule for the function f and the given arguments, which should be treated as bindings to Julia expressions.\n\nThe RHS should be a function call with a non-splatted argument list, and the LHS should be the derivative expression, or in the n-ary case, and n-tuple of expressions where the ith expression is the derivative of f w.r.t the ith argument. Arguments should interpolated wherever they are used on the RHS.\n\nThis rule is purely symbolic - no type annotations should be used.\n\nExamples:\n\n@define_diffrule cos(x)          = :(-sin($x))\n@define_diffrule /(x, y)         = :(inv($y)), :(-$x / ($y^2))\n@define_diffrule polygamma(m, x) = :NaN,       :(polygamma($m + 1, $x))\n\n\n\n"
+},
+
+{
+    "location": "diffrule_api.html#DiffBase.diffrule",
+    "page": "diffrule API",
+    "title": "DiffBase.diffrule",
+    "category": "Function",
+    "text": "diffrule(f::Symbol, args...)\n\nReturn the derivative expression for f at the given argument(s), with the argument(s) interpolated into the returned expression.\n\nIn the n-ary case, an n-tuple of expressions will be returned where the ith expression is the derivative of f w.r.t the ith argument.\n\nExamples:\n\njulia> DiffBase.diffrule(:sin, 1)\n:(cos(1))\n\njulia> DiffBase.diffrule(:sin, :x)\n:(cos(x))\n\njulia> DiffBase.diffrule(:sin, :(x * y^2))\n:(cos(x * y ^ 2))\n\njulia> DiffBase.diffrule(:^, :(x + 2), :c)\n(:(c * (x + 2) ^ (c - 1)), :((x + 2) ^ c * log(x + 2)))\n\n\n\n"
+},
+
+{
+    "location": "diffrule_api.html#DiffBase.hasdiffrule",
+    "page": "diffrule API",
+    "title": "DiffBase.hasdiffrule",
+    "category": "Function",
+    "text": "hasdiffrule(f::Symbol, arity::Int)\n\nReturn true if a differentiation rule is defined for f and arity, or returns false otherwise.\n\nHere, arity refers to the number of arguments accepted by f.\n\nExamples:\n\njulia> DiffBase.hasdiffrule(:sin, 1)\ntrue\n\njulia> DiffBase.hasdiffrule(:sin, 2)\nfalse\n\njulia> DiffBase.hasdiffrule(:-, 1)\ntrue\n\njulia> DiffBase.hasdiffrule(:-, 2)\ntrue\n\njulia> DiffBase.hasdiffrule(:-, 3)\nfalse\n\n\n\n"
+},
+
+{
+    "location": "diffrule_api.html#diffrule-API-1",
+    "page": "diffrule API",
+    "title": "diffrule API",
+    "category": "section",
+    "text": "CurrentModule = DiffBaseMany differentiation methods rely on the notion of \"primitive\" definitions that comprise \"building blocks\" that can be composed via various formulations of the chain rule.To facilitate the definition and use of such rules, DiffBase provides the diffrule API. These methods  allows you to define derivative rules, query which rules exist, and symbolically apply the rules to function call expressions.The complete list of differentiation rules defined by DiffBase can be found in DiffBase/src/rules.jl.DiffBase.@define_diffrule\nDiffBase.diffrule\nDiffBase.hasdiffrule"
 },
 
 ]}
