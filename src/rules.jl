@@ -4,6 +4,28 @@ struct DiffRule{F} end
 
 (::Type{DiffRule{F}})(args...) where {F} = error("no derivative rule defined for $F with arguments $args")
 
+"""
+    @define_diffrule f(x) = :(df_dx(\$x))
+    @define_diffrule f(x, y) = :(df_dx(\$x, \$y)), :(df_dy(\$x, \$y))
+    ⋮
+
+Define a new differentiation rule for the function `f` and the given arguments, which should
+be treated as bindings to Julia expressions.
+
+The RHS should be a function call with a non-splatted argument list, and the LHS should be
+the derivative expression, or in the `n`-ary case, and `n`-tuple of expressions where the
+`i`th expression is the derivative of `f` w.r.t the `i`th argument. Arguments should
+interpolated wherever they are used on the RHS.
+
+This rule is purely symbolic - no type annotations should be used.
+
+Examples:
+
+    @define_diffrule cos(x)          = :(-sin(\$x))
+    @define_diffrule /(x, y)         = :(inv(\$y)), :(-\$x / (\$y^2))
+    @define_diffrule polygamma(m, x) = :NaN,       :(polygamma(\$m + 1, \$x))
+
+"""
 macro define_diffrule(def)
     @assert isa(def, Expr) && def.head == :(=)
     rhs = def.args[1]
@@ -12,12 +34,61 @@ macro define_diffrule(def)
     f = rhs.args[1]
     args = rhs.args[2:end]
     rhs.args[1] = :(::Type{DiffRule{$(Expr(:quote, f))}})
-    push!(DEFINED_DIFFRULES, (f, length(args)))
+    key = (f, length(args))
+    in(DEFINED_DIFFRULES, key) || push!(DEFINED_DIFFRULES, key)
     return esc(def)
 end
 
+"""
+    diffrule(f::Symbol, args...)
+
+Return the derivative expression for `f` at the given argument(s), with the argument(s)
+interpolated into the returned expression.
+
+In the `n`-ary case, an `n`-tuple of expressions will be returned where the `i`th expression
+is the derivative of `f` w.r.t the `i`th argument.
+
+Examples:
+
+    julia> DiffBase.diffrule(:sin, 1)
+    :(cos(1))
+
+    julia> DiffBase.diffrule(:sin, :x)
+    :(cos(x))
+
+    julia> DiffBase.diffrule(:sin, :(x * y^2))
+    :(cos(x * y ^ 2))
+
+    julia> DiffBase.diffrule(:^, :(x + 2), :c)
+    (:(c * (x + 2) ^ (c - 1)), :((x + 2) ^ c * log(x + 2)))
+"""
 diffrule(f::Symbol, args...) = DiffRule{f}(args...)
 
+"""
+    hasdiffrule(f::Symbol, arity::Int)
+
+Return `true` if a differentiation rule is defined for `f` and `arity`, or returns `false`
+otherwise.
+
+Here, `arity` refers to the number of arguments accepted by `f`.
+
+Examples:
+
+    julia> DiffBase.hasdiffrule(:sin, 1)
+    true
+
+    julia> DiffBase.hasdiffrule(:sin, 2)
+    false
+
+    julia> DiffBase.hasdiffrule(:-, 1)
+    true
+
+    julia> DiffBase.hasdiffrule(:-, 2)
+    true
+
+    julia> DiffBase.hasdiffrule(:-, 3)
+    false
+"""
 hasdiffrule(f::Symbol, arity::Int) = in((f, arity), DEFINED_DIFFRULES)
 
 ################

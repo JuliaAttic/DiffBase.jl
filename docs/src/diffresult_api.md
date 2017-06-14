@@ -1,4 +1,4 @@
-# DiffResult API
+# `DiffResult` API
 
 ```@meta
 CurrentModule = DiffBase

@@ -5,7 +5,8 @@ makedocs(modules=[DiffBase],
          format = :html,
          sitename = "DiffBase",
          pages = ["Introduction" => "index.md",
-                  "DiffResult API" => "diffresultapi.md"])
+                  "DiffResult API" => "diffresult_api.md",
+                  "diffrule API" => "diffrule_api.md"])
 
 deploydocs(repo = "github.com/JuliaDiff/DiffBase.jl.git",
            osname = "linux",
