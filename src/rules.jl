@@ -212,6 +212,9 @@ hasdiffrule(f::Symbol, arity::Int) = in((f, arity), DEFINED_DIFFRULES)
 @define_diffrule hankelh1(ν, x)  = :NaN, :(  (hankelh1($ν - 1, $x) - hankelh1($ν + 1, $x)) / 2 )
 @define_diffrule hankelh2(ν, x)  = :NaN, :(  (hankelh2($ν - 1, $x) - hankelh2($ν + 1, $x)) / 2 )
 @define_diffrule polygamma(m, x) = :NaN, :(  polygamma($m + 1, $x)                             )
+@define_diffrule beta(a, b)      = :(beta($a, $b)*(digamma($a) - digamma($a + $b))),
+                                            :(beta($a, $b)*(digamma($b) - digamma($a + $b)))
+@define_diffrule lbeta(a, b)     = :(digamma($a) - digamma($a + $b)), :(digamma($b) - digamma($a + $b))
 
 # TODO:
 #
