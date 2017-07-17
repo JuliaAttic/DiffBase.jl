@@ -31,8 +31,10 @@ julia> x = rand(4);
 # and primal value based on the type and shape of `x`.
 julia> result = DiffBase.HessianResult(x)
 
-# instead of passing an output buffer to `hessian!`, we pass `result`
-julia> ForwardDiff.hessian!(result, f, x);
+# Instead of passing an output buffer to `hessian!`, we pass `result`.
+# Note that we re-alias to `result` - this is important! See `hessian!`
+# docs for why we do this.
+julia> result = ForwardDiff.hessian!(result, f, x);
 
 # ...and now we can get all the computed data from `result`
 julia> DiffBase.value(result) == f(x)
