@@ -65,6 +65,7 @@ vec2num_2(x) = x[1]*x[2] + sin(x[1])
 vec2num_3(x) = vecnorm(x' .* x)
 vec2num_4(x) = ((sum(x) + prod(x)); 1)
 vec2num_5(x) = sum((-x).^3)
+vec2num_6(x) = sum([ifelse(i > 0, i, 0) for i in x])
 
 function rosenbrock_1(x)
     a = one(eltype(x))
@@ -107,8 +108,8 @@ end
 self_weighted_logit(x) = inv(1.0 + exp(-dot(x, x)))
 
 const VECTOR_TO_NUMBER_FUNCS = (vec2num_1, vec2num_2,  vec2num_3, vec2num_4, vec2num_5,
-                                rosenbrock_1, rosenbrock_2, rosenbrock_3, rosenbrock_4,
-                                ackley, self_weighted_logit, first)
+                                vec2num_6, rosenbrock_1, rosenbrock_2, rosenbrock_3,
+                                rosenbrock_4, ackley, self_weighted_logit, first)
 
 ########################
 # f(x::Matrix)::Number #
