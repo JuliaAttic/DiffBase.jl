@@ -112,7 +112,8 @@ HessianResult(x::SArray{<:Any,T,<:Any,L}) where {T,L} = DiffResult(first(x), x, 
 end
 
 @generated function tuple_setindex(x::NTuple{N,Any}, y, ::Type{Val{i}}) where {N,i}
-    new_tuple = Expr(:tuple, [ifelse(i == n, :y, :(x[$n])) for n in 1:N]...)
+    T = x.parameters[i]
+    new_tuple = Expr(:tuple, [ifelse(i == n, :(convert($T, y)), :(x[$n])) for n in 1:N]...)
     return quote
         $(Expr(:meta, :inline))
         return $new_tuple
@@ -150,8 +151,7 @@ mutated in-place and returned. Thus, this function should be called as `r = valu
 """
 value!(r::MutableDiffResult, x::Number) = (r.value = x; return r)
 value!(r::MutableDiffResult, x::AbstractArray) = (copy!(value(r), x); return r)
-value!(r::ImmutableDiffResult, x::Union{Number,SArray}) = ImmutableDiffResult(x, r.derivs)
-value!(r::ImmutableDiffResult, x::AbstractArray) = ImmutableDiffResult(typeof(value(r))(x), r.derivs)
+value!(r::ImmutableDiffResult{O,V}, x::Union{Number,AbstractArray}) where {O,V} = ImmutableDiffResult(convert(V, x), r.derivs)
 
 """
     value!(f, r::DiffResult, x)
@@ -161,9 +161,8 @@ allocation (when possible).
 """
 value!(f, r::MutableDiffResult, x::Number) = (r.value = f(x); return r)
 value!(f, r::MutableDiffResult, x::AbstractArray) = (map!(f, value(r), x); return r)
-value!(f, r::ImmutableDiffResult, x::Number) = value!(r, f(x))
-value!(f, r::ImmutableDiffResult, x::SArray) = value!(r, map(f, x))
-value!(f, r::ImmutableDiffResult, x::AbstractArray) = value!(r, map(f, typeof(value(r))(x)))
+value!(f, r::ImmutableDiffResult{O,V}, x::Number) where {O,V} = value!(r, convert(V, f(x)))
+value!(f, r::ImmutableDiffResult{O,V}, x::AbstractArray) where {O,V} = value!(r, convert(V, map(f, x)))
 
 # derivative/derivative! #
 #------------------------#

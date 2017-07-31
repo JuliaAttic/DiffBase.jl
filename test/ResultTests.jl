@@ -9,7 +9,7 @@ using DiffBase: DiffResult, GradientResult, JacobianResult, HessianResult,
                 value, value!, derivative, derivative!, gradient, gradient!,
                 jacobian, jacobian!, hessian, hessian!
 
-k = 3
+k = 4
 n0, n1, n2 = rand(), rand(), rand()
 x0, x1, x2 = rand(k), rand(k, k), rand(k, k, k)
 s0, s1, s2 = SVector{k}(rand(k)), SMatrix{k,k}(rand(k, k)), SArray{Tuple{k,k,k}}(rand(k, k, k))
@@ -106,6 +106,11 @@ rs = value!(rs, s0)
 rsmix = value!(exp, rsmix, n1)
 @test value(rsmix) === exp(n1)
 rsmix = value!(rsmix, n0)
+
+ksqrt = Int(sqrt(k))
+T = typeof(SMatrix{ksqrt,ksqrt}(rand(ksqrt,ksqrt)))
+rs_new = value!(rs, convert(T, value(rs)))
+@test rs_new === rs
 
 # derivative/derivative! #
 #------------------------#
@@ -231,6 +236,10 @@ rsmix = gradient!(exp, rsmix, s0_new)
 @test typeof(gradient(rsmix)) === typeof(s0)
 rsmix = gradient!(exp, rsmix, s0)
 
+T = typeof(SVector{k*k}(rand(k*k)))
+rs_new = gradient!(rs, convert(T, gradient(rs)))
+@test rs_new === rs
+
 # jacobian/jacobian! #
 #--------------------#
 
@@ -256,6 +265,10 @@ rsmix = jacobian!(exp, rsmix, s0_new)
 @test typeof(jacobian(rsmix)) === typeof(s0)
 rsmix = jacobian!(exp, rsmix, s0)
 
+T = typeof(SVector{k*k}(rand(k*k)))
+rs_new = jacobian!(rs, convert(T, jacobian(rs)))
+@test rs_new === rs
+
 # hessian/hessian! #
 #------------------#
 
@@ -280,5 +293,9 @@ rsmix = hessian!(exp, rsmix, s1_new)
 @test hessian(rsmix) == exp.(s1_new)
 @test typeof(hessian(rsmix)) === typeof(s1)
 rsmix = hessian!(exp, rsmix, s1)
+
+T = typeof(SVector{k*k*k}(rand(k*k*k)))
+rs_new = hessian!(rs, convert(T, hessian(rs)))
+@test rs_new === rs
 
 end # module
