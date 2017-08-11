@@ -181,7 +181,7 @@ var documenterSearchIndex = {"docs": [
     "page": "diffrule API",
     "title": "DiffBase.@define_diffrule",
     "category": "Macro",
-    "text": "@define_diffrule f(x) = :(df_dx($x))\n@define_diffrule f(x, y) = :(df_dx($x, $y)), :(df_dy($x, $y))\n⋮\n\nDefine a new differentiation rule for the function f and the given arguments, which should be treated as bindings to Julia expressions.\n\nThe RHS should be a function call with a non-splatted argument list, and the LHS should be the derivative expression, or in the n-ary case, and n-tuple of expressions where the ith expression is the derivative of f w.r.t the ith argument. Arguments should interpolated wherever they are used on the RHS.\n\nThis rule is purely symbolic - no type annotations should be used.\n\nExamples:\n\n@define_diffrule cos(x)          = :(-sin($x))\n@define_diffrule /(x, y)         = :(inv($y)), :(-$x / ($y^2))\n@define_diffrule polygamma(m, x) = :NaN,       :(polygamma($m + 1, $x))\n\n\n\n"
+    "text": "@define_diffrule f(x) = :(df_dx($x))\n@define_diffrule f(x, y) = :(df_dx($x, $y)), :(df_dy($x, $y))\n⋮\n\nDefine a new differentiation rule for the function f and the given arguments, which should be treated as bindings to Julia expressions.\n\nThe RHS should be a function call with a non-splatted argument list, and the LHS should be the derivative expression, or in the n-ary case, an n-tuple of expressions where the ith expression is the derivative of f w.r.t the ith argument. Arguments should be interpolated wherever they are used on the RHS.\n\nNote that differentiation rules are purely symbolic, so no type annotations should be used.\n\nExamples:\n\n@define_diffrule cos(x)          = :(-sin($x))\n@define_diffrule /(x, y)         = :(inv($y)), :(-$x / ($y^2))\n@define_diffrule polygamma(m, x) = :NaN,       :(polygamma($m + 1, $x))\n\n\n\n"
 },
 
 {
@@ -197,7 +197,7 @@ var documenterSearchIndex = {"docs": [
     "page": "diffrule API",
     "title": "DiffBase.hasdiffrule",
     "category": "Function",
-    "text": "hasdiffrule(f::Symbol, arity::Int)\n\nReturn true if a differentiation rule is defined for f and arity, or returns false otherwise.\n\nHere, arity refers to the number of arguments accepted by f.\n\nExamples:\n\njulia> DiffBase.hasdiffrule(:sin, 1)\ntrue\n\njulia> DiffBase.hasdiffrule(:sin, 2)\nfalse\n\njulia> DiffBase.hasdiffrule(:-, 1)\ntrue\n\njulia> DiffBase.hasdiffrule(:-, 2)\ntrue\n\njulia> DiffBase.hasdiffrule(:-, 3)\nfalse\n\n\n\n"
+    "text": "hasdiffrule(f::Symbol, arity::Int)\n\nReturn true if a differentiation rule is defined for f and arity, or return false otherwise.\n\nHere, arity refers to the number of arguments accepted by f.\n\nExamples:\n\njulia> DiffBase.hasdiffrule(:sin, 1)\ntrue\n\njulia> DiffBase.hasdiffrule(:sin, 2)\nfalse\n\njulia> DiffBase.hasdiffrule(:-, 1)\ntrue\n\njulia> DiffBase.hasdiffrule(:-, 2)\ntrue\n\njulia> DiffBase.hasdiffrule(:-, 3)\nfalse\n\n\n\n"
 },
 
 {
