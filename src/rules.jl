@@ -13,11 +13,11 @@ Define a new differentiation rule for the function `f` and the given arguments, 
 be treated as bindings to Julia expressions.
 
 The RHS should be a function call with a non-splatted argument list, and the LHS should be
-the derivative expression, or in the `n`-ary case, and `n`-tuple of expressions where the
-`i`th expression is the derivative of `f` w.r.t the `i`th argument. Arguments should
+the derivative expression, or in the `n`-ary case, an `n`-tuple of expressions where the
+`i`th expression is the derivative of `f` w.r.t the `i`th argument. Arguments should be
 interpolated wherever they are used on the RHS.
 
-This rule is purely symbolic - no type annotations should be used.
+Note that differentiation rules are purely symbolic, so no type annotations should be used.
 
 Examples:
 
@@ -67,7 +67,7 @@ diffrule(f::Symbol, args...) = DiffRule{f}(args...)
 """
     hasdiffrule(f::Symbol, arity::Int)
 
-Return `true` if a differentiation rule is defined for `f` and `arity`, or returns `false`
+Return `true` if a differentiation rule is defined for `f` and `arity`, or return `false`
 otherwise.
 
 Here, `arity` refers to the number of arguments accepted by `f`.
