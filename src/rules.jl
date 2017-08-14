@@ -161,11 +161,10 @@ hasdiffrule(f::Symbol, arity::Int) = in((f, arity), DEFINED_DIFFRULES)
 @define_diffrule /(x, y) = :(inv($y)),            :(-$x / ($y^2))
 @define_diffrule ^(x, y) = :($y * ($x^($y - 1))), :(($x^$y) * log($x))
 
-# TODO:
-#
-# mod
-# hypot
-# atan2
+@define_diffrule atan2(x, y) = :($y / ($x^2 + $y^2)), :(-$x / ($x^2 + $y^2))
+@define_diffrule hypot(x, y) = :($x / hypot($x, $y)), :($y / hypot($x, $y))
+@define_diffrule mod(x, y)   = :(first(promote(ifelse(isinteger($x / $y), NaN, 1), NaN))), :(z = $x / $y; first(promote(ifelse(isinteger(z), NaN, -floor(z)), NaN)))
+@define_diffrule rem(x, y)   = :(first(promote(ifelse(isinteger($x / $y), NaN, 1), NaN))), :(z = $x / $y; first(promote(ifelse(isinteger(z), NaN, -trunc(z)), NaN)))
 
 ####################
 # SpecialFunctions #
