@@ -38,3 +38,17 @@ for f in vcat(RealInterface.BINARY_MATH, RealInterface.BINARY_ARITHMETIC, RealIn
         end
     end
 end
+
+# Treat rem2pi separately because of its non-numeric second argument:
+derivs = DiffBase.diffrule(:rem2pi, :x, :y)
+for xtype in [:Float64, :BigFloat, :Int64]
+    for mode in [:RoundUp, :RoundDown, :RoundToZero, :RoundNearest]
+        @eval begin
+            x = $xtype(rand(1 : 10))
+            y = $mode
+            dx, dy = $(derivs[1]), $(derivs[2])
+            @test isapprox(dx, finitediff(z -> rem2pi(z, y), float(x)), rtol=0.05)
+            @test isnan(dy)
+        end
+    end
+end

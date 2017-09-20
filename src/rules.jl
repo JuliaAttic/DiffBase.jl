@@ -165,6 +165,7 @@ hasdiffrule(f::Symbol, arity::Int) = in((f, arity), DEFINED_DIFFRULES)
 @define_diffrule hypot(x, y) = :($x / hypot($x, $y)), :($y / hypot($x, $y))
 @define_diffrule mod(x, y)   = :(first(promote(ifelse(isinteger($x / $y), NaN, 1), NaN))), :(z = $x / $y; first(promote(ifelse(isinteger(z), NaN, -floor(z)), NaN)))
 @define_diffrule rem(x, y)   = :(first(promote(ifelse(isinteger($x / $y), NaN, 1), NaN))), :(z = $x / $y; first(promote(ifelse(isinteger(z), NaN, -trunc(z)), NaN)))
+@define_diffrule rem2pi(x, r) = :(1), :NaN
 
 ####################
 # SpecialFunctions #
